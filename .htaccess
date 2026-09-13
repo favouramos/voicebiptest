@@ -1,0 +1,4 @@
+Options -Indexes
+<FilesMatch "^(config\.php|config\.example\.php|.*\.sql|system-prompt\.txt|voicebip-tool-definition\.json)$">
+  Require all denied
+</FilesMatch>

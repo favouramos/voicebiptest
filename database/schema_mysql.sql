@@ -1,0 +1,41 @@
+CREATE TABLE IF NOT EXISTS appointments (
+    id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    booking_id VARCHAR(64) NOT NULL,
+    call_id VARCHAR(128) NULL,
+    tool_call_id VARCHAR(128) NULL,
+    agent_id VARCHAR(128) NULL,
+    customer_name VARCHAR(190) NOT NULL,
+    customer_phone VARCHAR(40) NOT NULL,
+    appointment_date DATE NOT NULL,
+    appointment_time TIME NOT NULL,
+    service VARCHAR(190) NOT NULL,
+    notes TEXT NULL,
+    status ENUM('confirmed','pending','completed','cancelled') NOT NULL DEFAULT 'confirmed',
+    source VARCHAR(40) NOT NULL DEFAULT 'voicebip',
+    raw_arguments JSON NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    UNIQUE KEY uq_booking_id (booking_id),
+    UNIQUE KEY uq_tool_call_id (tool_call_id),
+    UNIQUE KEY uq_slot (appointment_date, appointment_time),
+    KEY idx_date (appointment_date),
+    KEY idx_status (status),
+    KEY idx_phone (customer_phone)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS call_events (
+    id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    event_id VARCHAR(128) NOT NULL,
+    event_type VARCHAR(80) NOT NULL,
+    agent_id VARCHAR(128) NULL,
+    call_id VARCHAR(128) NULL,
+    from_number VARCHAR(40) NULL,
+    to_number VARCHAR(40) NULL,
+    payload JSON NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    UNIQUE KEY uq_event_id (event_id),
+    KEY idx_call_id (call_id),
+    KEY idx_event_type (event_type)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

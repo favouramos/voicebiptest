@@ -1,0 +1,60 @@
+[
+  {
+    "type": "function",
+    "function": {
+      "name": "check_appointment_availability",
+      "description": "Check whether a requested appointment date and time is available before booking it.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "appointment_date": {
+            "type": "string",
+            "description": "Appointment date in YYYY-MM-DD format. Convert the caller's natural-language date to this format."
+          },
+          "appointment_time": {
+            "type": "string",
+            "description": "Appointment time in 24-hour HH:MM format. Convert the caller's natural-language time to this format."
+          }
+        },
+        "required": ["appointment_date", "appointment_time"]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "save_appointment",
+      "description": "Save a confirmed appointment after the caller has provided all required booking details and the requested slot has been confirmed available.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "customer_name": {
+            "type": "string",
+            "description": "Full name of the customer."
+          },
+          "customer_phone": {
+            "type": "string",
+            "description": "Customer phone number, preferably in +234 E.164 format."
+          },
+          "appointment_date": {
+            "type": "string",
+            "description": "Appointment date in YYYY-MM-DD format."
+          },
+          "appointment_time": {
+            "type": "string",
+            "description": "Appointment time in 24-hour HH:MM format."
+          },
+          "service": {
+            "type": "string",
+            "description": "Service or appointment type requested by the caller."
+          },
+          "notes": {
+            "type": "string",
+            "description": "Optional extra notes or special requests."
+          }
+        },
+        "required": ["customer_name", "customer_phone", "appointment_date", "appointment_time", "service"]
+      }
+    }
+  }
+]

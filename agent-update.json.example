@@ -1,0 +1,5 @@
+{
+  "webhook_url": "https://calling.sophiathepromoter.com/api/voicebip.php",
+  "system_prompt": "PASTE THE CONTENT OF system-prompt.txt HERE",
+  "tool_definitions": "PASTE THE EXACT STRINGIFIED CONTENT OF voicebip-tool-definition.json HERE"
+}
